@@ -7,6 +7,7 @@ public class Cuenta {
     private long idCuenta;
     private String RFC;
     private String nombre;
+    private String apellidos;
     private float saldo;
     private int [] fechaCreacion = new int[5];
     //private Movimiento [] mov = {};
@@ -14,12 +15,19 @@ public class Cuenta {
     private ArrayList <Movimiento> depositos = new ArrayList<>();
     private Random num = new Random();
 
-
-    public void Cuenta(String RFC, String nombre, float saldoInicial){
+    /**
+     * Constructor de la clase cuenta.
+     * @param RFC
+     * @param nombres
+     * @param apellidos
+     * @param saldoInicial
+     */
+    public Cuenta(String RFC, String nombres, String apellidos, float saldoInicial){
 
         Random num = new Random();
         this.RFC = RFC;
-        this.nombre = nombre;
+        this.nombre = nombres;
+        this.apellidos = apellidos;
 
         Calendar fecha = Calendar.getInstance();
 
@@ -66,6 +74,14 @@ public class Cuenta {
      */
     public String getNombre() {
         return nombre;
+    }
+
+    /**
+     * Regresa los apellidos.
+     * @return apellidos
+     */
+    public String getApellidos() {
+        return apellidos;
     }
 
     /**
