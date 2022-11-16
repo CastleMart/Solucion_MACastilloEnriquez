@@ -11,8 +11,7 @@ public class Cuenta {
     private float saldo;
     private int [] fechaCreacion = new int[5];
     //private Movimiento [] mov = {};
-    private ArrayList <Movimiento> retiros = new ArrayList<>();
-    private ArrayList <Movimiento> depositos = new ArrayList<>();
+    private ArrayList <Movimiento> mov = new ArrayList<>();
     private Random num = new Random();
 
     /**
@@ -117,20 +116,13 @@ public class Cuenta {
     }
 
     /**
-     * Regresa los retiros realizados.
+     * Regresa los movimientos realizados.
      * @return
      */
-    public ArrayList<Movimiento> getRetiros() {
-        return retiros;
+    public ArrayList<Movimiento> getMov() {
+        return mov;
     }
 
-    /**
-     * Regresa los depositos realizados.
-     * @return
-     */
-    public ArrayList<Movimiento> getDepositos() {
-        return depositos;
-    }
 
     /**
      * Método que realiza un retiro dentro de la cuenta.
@@ -142,10 +134,12 @@ public class Cuenta {
         if (this.saldo > retiro.getMonto()){
 
             this.saldo -= retiro.getMonto();
-            this.retiros.add(retiro);
+            this.mov.add(retiro);
+            System.out.println("El retiro fue exitoso.");
             return true;
         }
         else {
+            System.out.println("No es posible retirar.");
             return false;
         }
 
@@ -159,7 +153,7 @@ public class Cuenta {
     public void depositarMonto(float monto, String concepto){
         Movimiento deposito = new Movimiento("Deposito", monto, concepto);
         this.saldo += deposito.getMonto();
-        this.depositos.add(deposito);
+        this.mov.add(deposito);
     }
 
 

@@ -6,7 +6,7 @@ public class Banco {
     /**
      * Constructor de la Clase Banco.
      */
-    public void Banco(){
+    public Banco(){
         cuentas = new ArrayList<>();
     }
 
@@ -35,18 +35,13 @@ public class Banco {
         System.out.println("La id de la cuenta es: " + cuenta.getIdCuenta());
     }
 
-
-
-    public void BusquedaCuenta(){
-
-    }
-
     /**
      * Busca por medio de la Id una cuenta.
      * @param idCuenta
-     * @return
+     * @return cuenta o nulo
      */
-    public Cuenta getCuentaID (long idCuenta){
+    public Cuenta getBuscarCuentaID(long idCuenta){
+
 
         for (int cont = 0; cont < this.cuentas.size(); cont ++){
             if (idCuenta == this.cuentas.get(cont).getIdCuenta()){
@@ -56,6 +51,49 @@ public class Banco {
         }
 
         return null;
+
+    }
+
+    /**
+     * Busca por medio del apellido una cuenta
+     * @param apellidos
+     * @return lista de posibles cuentas
+     */
+    public ArrayList <Cuenta> getBuscarCuentaApellido(String apellidos){
+
+        ArrayList <Cuenta> busCuentas = new ArrayList<>();
+
+        for (int cont = 0; cont < this.cuentas.size(); cont ++){
+            if (apellidos == this.cuentas.get(cont).getApellidos()){
+
+                busCuentas.add(this.cuentas.get(cont));
+            }
+        }
+
+        return busCuentas;
+    }
+
+    /**
+     * Busca por medio del RFC del usuario de la cuenta.
+     * @param rfc
+     * @return cuenta o nulo
+     */
+    public Cuenta getBuscarCuentaRFC(String rfc){
+
+
+        for (int cont = 0; cont < this.cuentas.size(); cont ++){
+            if (rfc == this.cuentas.get(cont).getRFC()){
+
+                return this.cuentas.get(cont);
+            }
+        }
+
+        return null;
+
+    }
+
+
+    public void historialTransacciones(){
 
     }
 }
