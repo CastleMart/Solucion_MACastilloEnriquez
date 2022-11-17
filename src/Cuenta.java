@@ -157,4 +157,27 @@ public class Cuenta {
     }
 
 
+    /**
+     * Muestra el historial de transacciones.
+     */
+    public void historialTransacciones(){
+
+        Movimiento movimiento ;
+        int [] fecha;
+
+
+
+        for(int cont = 0; cont < this.mov.size(); cont ++){
+            movimiento = this.mov.get(cont);
+            fecha = movimiento.getFechaMovimiento();
+
+            System.out.println("------------------------------------------------------------------------------------------");
+            System.out.printf("LA fecha de la transacción:  %d/%d/%d a las %d con %d minutos.\n", fecha[0], fecha[1], fecha[2], fecha[3], fecha[4]);
+            System.out.println("Se realizó un " + movimiento.getTipoMovimiento() + " con un monto de " + movimiento.getMonto());
+            System.out.println("Concepto: " + movimiento.getConcepto());
+
+        }
+
+        System.out.println("------------------------------------------------------------------------------------------");
+    }
 }

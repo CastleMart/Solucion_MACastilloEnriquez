@@ -40,6 +40,7 @@ public class Main {
             System.out.println("Monto: " + movimiento.getMonto());
 
         }
+        cuenta.historialTransacciones();
 
         //System.out.printf("Fecha tomada fue: %d/ %d/ %d -- %d:%d  \n", fecha[0], fecha[1], fecha[2], fecha[3], fecha[4]);
 
