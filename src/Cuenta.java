@@ -1,3 +1,5 @@
+import jdk.jfr.Unsigned;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -5,6 +7,7 @@ import java.util.Random;
 public class Cuenta {
     //Atributos de la clase cuenta.
     private long idCuenta;
+
     private String RFC;
     private String nombre;
     private String apellidos;
@@ -13,6 +16,7 @@ public class Cuenta {
     //private Movimiento [] mov = {};
     private ArrayList <Movimiento> mov = new ArrayList<>();
     private Random num = new Random();
+    private double ingresos, egresos;
 
     /**
      * Constructor de la clase cuenta.
@@ -27,6 +31,8 @@ public class Cuenta {
         this.RFC = RFC;
         this.nombre = nombres;
         this.apellidos = apellidos;
+        this.ingresos = 0;
+        this.egresos = 0;
 
         Calendar fecha = Calendar.getInstance();
 
@@ -123,6 +129,24 @@ public class Cuenta {
         return mov;
     }
 
+    /**
+     * Se regresa los egresos totales de la cuenta
+     * @return
+     */
+    public double getEgresos() {
+        return egresos;
+    }
+
+    /**
+     * Se regresa los ingresos totales de la cuenta.
+     * @return
+     */
+    public double getIngresos() {
+        return ingresos;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------
+
 
     /**
      * Método que realiza un retiro dentro de la cuenta.
@@ -131,11 +155,13 @@ public class Cuenta {
      */
     public boolean retirarMonto(float monto, String concepto){
         Movimiento retiro = new Movimiento("Retiro", monto, concepto);
-        if (this.saldo > retiro.getMonto()){
+        if (this.saldo > retiro.getMonto() && this.saldo > 0){
 
             this.saldo -= retiro.getMonto();
+            this.egresos += retiro.getMonto();
             this.mov.add(retiro);
             System.out.println("El retiro fue exitoso.");
+
             return true;
         }
         else {
@@ -150,10 +176,17 @@ public class Cuenta {
      * @param monto
      * @param concepto
      */
-    public void depositarMonto(float monto, String concepto){
+    public boolean depositarMonto(float monto, String concepto){
+        if(monto > 0){
+            System.out.println("No es valido la entrada del monto.");
+            return false;
+        }
         Movimiento deposito = new Movimiento("Deposito", monto, concepto);
         this.saldo += deposito.getMonto();
+        this.ingresos += deposito.getMonto();
         this.mov.add(deposito);
+
+        return true;
     }
 
 
@@ -172,9 +205,10 @@ public class Cuenta {
             fecha = movimiento.getFechaMovimiento();
 
             System.out.println("------------------------------------------------------------------------------------------");
-            System.out.printf("LA fecha de la transacción:  %d/%d/%d a las %d con %d minutos.\n", fecha[0], fecha[1], fecha[2], fecha[3], fecha[4]);
-            System.out.println("Se realizó un " + movimiento.getTipoMovimiento() + " con un monto de " + movimiento.getMonto());
-            System.out.println("Concepto: " + movimiento.getConcepto());
+            System.out.println(" * * *         " + movimiento.getTipoMovimiento() + "         * * *");
+            System.out.printf("   %d/%d/%d a las %d con %d minutos.\n", fecha[0], fecha[1], fecha[2], fecha[3], fecha[4]);
+            System.out.println("El " + movimiento.getTipoMovimiento() + " fue de  $" + movimiento.getMonto() + " Pesos");
+            System.out.println("Concepto:  " + movimiento.getConcepto());
 
         }
 
