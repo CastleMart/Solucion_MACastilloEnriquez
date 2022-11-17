@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Banco {
     private ArrayList<Cuenta> cuentas;
-
+    private double ingresos;
+    private double egresos;
     private Cuenta sesion;
 
     /**
@@ -12,6 +13,8 @@ public class Banco {
     public Banco() {
 
         cuentas = new ArrayList<>();
+        ingresos = 0;
+        egresos = 0;
 
     }
 
@@ -102,9 +105,22 @@ public class Banco {
     }
 
     /**
-     * Se da el total de ingresos del banco
+     * Se regresa los ingresos del banco.
      * @return ingresos
      */
+    public double getIngresos(){
+        return this.ingresos;
+    }
+
+    /**
+     * Se regresa los egresos del banco.
+      * @return egresos
+     */
+    public double getEgresos() {
+        return egresos;
+    }
+
+
 
     /**
      * Método para iniciar sesión en una cuenta.
@@ -208,6 +224,7 @@ public class Banco {
                         estado = sesion.depositarMonto(monto, concepto);
                         if (estado) {
                             guardarDatos();
+                            this.ingresos += monto;
                         }
 
                     } while (estado);
@@ -232,9 +249,10 @@ public class Banco {
                             System.out.println("Ocurrió un error.");
                         }
 
-                        estado = sesion.depositarMonto(monto, concepto);
+                        estado = sesion.retirarMonto(monto, concepto);
                         if (estado) {
                             guardarDatos();
+                            this.egresos += monto;
                         }
 
 
