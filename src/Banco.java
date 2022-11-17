@@ -40,6 +40,7 @@ public class Banco {
         }
 
         this.cuentas.add(cuenta);
+        this.ingresos += saldoInicial;
         System.out.println("Se ha agregado la cuenta con éxito");
         System.out.println("La id de la cuenta es: " + cuenta.getIdCuenta());
     }
@@ -143,8 +144,6 @@ public class Banco {
 
         opciones();
 
-        System.out.println("Saldo: " + sesion.getSaldo());
-
 
         return true;
     }
@@ -174,7 +173,7 @@ public class Banco {
 
         do {
             opcion = 0;
-            while (opcion > 0 && opcion <= 5) {
+            while (opcion <= 0 || opcion > 5) {
 
                 System.out.println("\n1. Mostrar Saldo.");
                 System.out.println("2. Deposiar a cuenta.");
@@ -191,7 +190,7 @@ public class Banco {
 
             concepto = "";
 
-            salir = false;
+            salir = true;
 
             switch (opcion) {
 
@@ -202,7 +201,7 @@ public class Banco {
 
                 case 2:
                     monto = 0;
-                    concepto = "";
+                    //concepto = "";
 
                     do {
                         System.out.print("Monto a depositar: ");
@@ -264,7 +263,7 @@ public class Banco {
                     break;
                 case 5:
                     sesion = null;
-                    salir = true;
+                    salir = false;
                     System.out.println("Se ha salido de la sesión.");
                     break;
 
@@ -275,6 +274,10 @@ public class Banco {
 
         }while (salir) ;
 
+    }
+
+    public ArrayList<Cuenta> getCuentas() {
+        return cuentas;
     }
 }
 
