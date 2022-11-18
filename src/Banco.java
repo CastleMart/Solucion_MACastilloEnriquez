@@ -139,10 +139,13 @@ public class Banco {
             System.out.println("No se ha encontrado la cuenta.");
             return false;
         }
+        else {
+            opciones();
+        }
 
 
 
-        opciones();
+
 
 
         return true;
