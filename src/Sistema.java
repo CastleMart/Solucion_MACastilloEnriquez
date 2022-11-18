@@ -19,7 +19,7 @@ public class Sistema {
         String respuesta = "";
         while (seguirPrograma) {
             opcion = 0;
-            while (opcion <= 0 || opcion > 4) {
+            while (opcion <= 0 || opcion > 5) {
                 sc = new Scanner(System.in);
                 System.out.println("--------------------------------------------------------------------------------");
                 System.out.println("              Bienvenido a Banco Patito.                       ");
@@ -28,7 +28,9 @@ public class Sistema {
                 System.out.println("1. Crear nueva cuenta.");
                 System.out.println("2. Ingresar a una cuenta.");
                 System.out.println("3. Ver ingresos y egresos del banco.");
-                System.out.println("4. Salir del programa.");
+                System.out.println("4. Mostrar todas las cuentas.");
+                System.out.println("5. Salir del programa.");
+
                 System.out.print("Seleccione una opción: ");
                 try {
                     opcion = sc.nextInt();
@@ -87,6 +89,11 @@ public class Sistema {
                     System.out.println("Los egresos del banco son: " + bancoPatito.getEgresos());
                     break;
                 case 4:
+                    this.bancoPatito.mostrarCuentasCreadas();
+                    break;
+
+                case 5:
+
                     seguirPrograma = false;
                     break;
                 default:

@@ -21,11 +21,11 @@ public class Banco {
 
     /**
      * Método que crear las cuentas de los usuarios del banco.
-     *
      * @param rfc
      * @param nombre
      * @param apellidos
      * @param saldoInicial
+     * @param password
      */
     public void crearCuenta(String rfc, String nombre, String apellidos, float saldoInicial, int password) {
 
@@ -298,8 +298,21 @@ public class Banco {
 
     }
 
-    public ArrayList<Cuenta> getCuentas() {
-        return cuentas;
+    /**
+     * Método que muestra una lista de las cuentas creadas.
+     */
+    public void mostrarCuentasCreadas() {
+
+        int id;
+        String nombre, apellido;
+        //System.out.println("       id         Nombre        Apellido");
+        for (int cont = 0; cont < this.cuentas.size(); cont ++){
+            id = (int) this.cuentas.get(cont).getIdCuenta();
+            nombre = this.cuentas.get(cont).getNombre();
+            apellido = this.cuentas.get(cont).getApellidos();
+
+            System.out.printf("id:%d -  Nombres: %s  -  Apellidos: %s\n", id, nombre, apellido);
+        }
     }
 }
 
