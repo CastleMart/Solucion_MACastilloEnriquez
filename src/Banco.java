@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Banco {
     private ArrayList<Cuenta> cuentas;
+    private Seguro seguro;
     private double ingresos;
     private double egresos;
     private Cuenta sesion;
@@ -12,7 +13,7 @@ public class Banco {
      * Constructor de la Clase Banco.
      */
     public Banco() {
-
+        seguro = new Seguro();
         cuentas = new ArrayList<>();
         ingresos = 0;
         egresos = 0;
@@ -186,7 +187,7 @@ public class Banco {
 
         do {
             opcion = 0;
-            while (opcion <= 0 || opcion > 5) {
+            while (opcion <= 0 || opcion > 6) {
                 sc = new Scanner(System.in);
                 System.out.println("--------------------------------------------------------------------------------");
                 System.out.println("La cuenta ingresada es de: " + sesion.getNombre() +" " + sesion.getApellidos());
@@ -197,7 +198,8 @@ public class Banco {
                 System.out.println("2. Deposiar a cuenta.");
                 System.out.println("3. Retirar a cuenta.");
                 System.out.println("4. Historial de transacciones");
-                System.out.println("5. Salir de la sesión.\n");
+                System.out.println("5. Ver ofertas de seguros.");
+                System.out.println("6. Salir de la sesión.\n");
                 System.out.print("Seleccione un número: ");
                 try {
                     opcion = sc.nextInt();
@@ -279,6 +281,10 @@ public class Banco {
                     sesion.historialTransacciones();
                     break;
                 case 5:
+                    this.seguro.mostrarSeguros();
+                    break;
+
+                case 6:
                     sesion = null;
                     salir = false;
                     System.out.println("Se ha salido de la sesión.");

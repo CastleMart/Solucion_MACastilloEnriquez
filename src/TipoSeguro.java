@@ -6,18 +6,22 @@ public class TipoSeguro {
     private int duracionMeses;
     private float pagoMensual;
 
+    private byte cuatrimestreOferta;
+
+
     /**
      * Constructor de la clase tipo de seguro.
      * @param tipoSeguro
-     * @param precio
+     * @param pagoMensual
      * @param duracionMeses
      * @param precioSeguro
      */
-    public TipoSeguro(String tipoSeguro,float precio, int duracionMeses, float precioSeguro){
+    public TipoSeguro(String tipoSeguro,float pagoMensual, int duracionMeses, float precioSeguro, byte cuatrimestreOferta){
         this.tipoSeguro = tipoSeguro;
-        this.precioSeguro = precio;
+        this.pagoMensual = pagoMensual;
         this.duracionMeses = duracionMeses;
         this.precioSeguro = precioSeguro;
+        this.cuatrimestreOferta = cuatrimestreOferta;
 
     }
 
@@ -27,6 +31,22 @@ public class TipoSeguro {
      */
     public void setDescripcion(String tipoSeguro){
         this.tipoSeguro = tipoSeguro;
+    }
+
+    /**
+     * Setter del pago del seguro.
+     * @param pagoMensual
+     */
+    public void setPagoMensual(float pagoMensual) {
+        this.pagoMensual = pagoMensual;
+    }
+
+    /**
+     * Regresa que cuatrimestre del año corresponde la oferta.
+     * @return
+     */
+    public byte getCuatrimestreOferta() {
+        return cuatrimestreOferta;
     }
 
     /**
