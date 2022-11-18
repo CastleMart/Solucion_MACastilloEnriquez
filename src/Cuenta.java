@@ -1,5 +1,3 @@
-import jdk.jfr.Unsigned;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -17,15 +15,17 @@ public class Cuenta {
     private ArrayList <Movimiento> mov = new ArrayList<>();
     private Random num = new Random();
     private double ingresos, egresos;
+    private int password;
 
     /**
      * Constructor de la clase cuenta.
+     *
      * @param RFC
      * @param nombres
      * @param apellidos
      * @param saldoInicial
      */
-    public Cuenta(String RFC, String nombres, String apellidos, float saldoInicial){
+    public Cuenta(String RFC, String nombres, String apellidos, float saldoInicial, int password){
 
         Random num = new Random();
         this.RFC = RFC;
@@ -33,6 +33,7 @@ public class Cuenta {
         this.apellidos = apellidos;
         this.ingresos = 0;
         this.egresos = 0;
+        this.password = password;
 
         Calendar fecha = Calendar.getInstance();
 
@@ -54,6 +55,16 @@ public class Cuenta {
 
         this.idCuenta = num.nextInt(999999999);
 
+    }
+
+    /**
+     * Método que verifica la contraseña.
+     * @param password
+     * @return
+     */
+    public boolean verificarPassword(int password){
+
+        return this.password == password;
     }
 
     /**

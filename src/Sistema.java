@@ -54,11 +54,16 @@ public class Sistema {
 
                     }
 
+                    System.out.print("Ingrese la contraseña nueva: ");
+                    opcion = entradaDatosInt();
+
                     System.out.print("Ingrese el saldo inicial del Cliente: ");
                     saldoInicial = entradaDatosFloat();
 
+
+
                     if(saldoInicial > 0){
-                        bancoPatito.crearCuenta(info.get(0),info.get(1),info.get(2),saldoInicial);
+                        bancoPatito.crearCuenta(info.get(0),info.get(1),info.get(2),saldoInicial,opcion);
                         System.out.println("\nSe ha creado la cuenta exitosamente.");
                     }
                     else {
@@ -69,10 +74,13 @@ public class Sistema {
 
                 case 2:
                     long idCuenta = 0;
-                    System.out.println("De el ID de la cuenta: ");
+                    int contra;
+                    System.out.println("Dé ID de la cuenta: ");
                     idCuenta = entradaDatosInt();
+                    System.out.println("Ingrese la contraseña: ");
+                    contra = entradaDatosInt();
 
-                    bancoPatito.entrarCuenta(idCuenta);
+                    bancoPatito.entrarCuenta(idCuenta, contra );
                     break;
                 case 3:
                     System.out.println("Los ingresos del banco son: " + bancoPatito.getIngresos());

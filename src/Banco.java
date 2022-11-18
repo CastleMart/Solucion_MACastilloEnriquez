@@ -27,9 +27,9 @@ public class Banco {
      * @param apellidos
      * @param saldoInicial
      */
-    public void crearCuenta(String rfc, String nombre, String apellidos, float saldoInicial) {
+    public void crearCuenta(String rfc, String nombre, String apellidos, float saldoInicial, int password) {
 
-        Cuenta cuenta = new Cuenta(rfc, nombre, apellidos, saldoInicial);
+        Cuenta cuenta = new Cuenta(rfc, nombre, apellidos, saldoInicial, password);
 
 
         cuenta.generarIdCuenta();
@@ -128,9 +128,10 @@ public class Banco {
      * Método para iniciar sesión en una cuenta.
      *
      * @param idCuenta
-     * @return
+     * @param password
+     * @return true o false
      */
-    public boolean entrarCuenta(long idCuenta) {
+    public boolean entrarCuenta(long idCuenta, int password) {
         Scanner sc = new Scanner(System.in);
         String opcion = "";
         this.sesion = getBuscarCuentaID(idCuenta);
@@ -138,9 +139,11 @@ public class Banco {
         if (sesion == null) {
             System.out.println("No se ha encontrado la cuenta.");
             return false;
+        } else if (this.sesion.verificarPassword(password)) {
+            opciones();
         }
         else {
-            opciones();
+            System.out.println("Contraseña incorrecta.");
         }
 
 
