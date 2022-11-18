@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -139,8 +140,7 @@ public class Banco {
             return false;
         }
 
-        System.out.println("--------------------------------------------------------------------------------");
-        System.out.println("La cuenta ingresada es de: " + sesion.getNombre() + sesion.getApellidos());
+
 
         opciones();
 
@@ -153,7 +153,14 @@ public class Banco {
      */
     private void guardarDatos() {
 
-        cuentas.set((int) sesion.getIdCuenta(), sesion);
+        for (int cont = 0; cont < this.cuentas.size(); cont++) {
+            if (sesion.getIdCuenta() == this.cuentas.get(cont).getIdCuenta()) {
+
+                cuentas.set(cont, sesion);
+                cont = this.cuentas.size();
+            }
+        }
+
         System.out.print("Se ha guardado la información.");
 
 
@@ -174,17 +181,22 @@ public class Banco {
         do {
             opcion = 0;
             while (opcion <= 0 || opcion > 5) {
+                sc = new Scanner(System.in);
+                System.out.println("--------------------------------------------------------------------------------");
+                System.out.println("La cuenta ingresada es de: " + sesion.getNombre() +" " + sesion.getApellidos());
+                System.out.println("--------------------------------------------------------------------------------");
 
-                System.out.println("\n1. Mostrar Saldo.");
+                System.out.println("                Menú                      ");
+                System.out.println("1. Mostrar Saldo.");
                 System.out.println("2. Deposiar a cuenta.");
                 System.out.println("3. Retirar a cuenta.");
                 System.out.println("4. Historial de transacciones");
-                System.out.println("5. Salir de la sesión.");
-
+                System.out.println("5. Salir de la sesión.\n");
+                System.out.print("Seleccione un número: ");
                 try {
                     opcion = sc.nextInt();
                 } catch (Exception e) {
-                    System.out.println("Ocurrió un error.");
+                    System.out.println("Ocurrió un error. ");
                 }
             }
 
@@ -200,62 +212,61 @@ public class Banco {
                     break;
 
                 case 2:
-                    monto = 0;
+                    monto = 1;
+
                     //concepto = "";
 
-                    do {
-                        System.out.print("Monto a depositar: ");
 
-                        try {
-                            monto = sc.nextInt();
-                        } catch (Exception e) {
-                            System.out.println("Ocurrió un error.");
-                        }
+                    System.out.print("Monto a depositar: ");
 
-                        System.out.print("Concepto: ");
+                    try {
+                        monto = sc.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Ocurrió un error.");
+                    }
 
-                        try {
-                            concepto = sc.nextLine();
-                        } catch (Exception e) {
-                            System.out.println("Ocurrió un error.");
-                        }
+                    System.out.print("Concepto: ");
+                    sc = new Scanner(System.in);
 
-                        estado = sesion.depositarMonto(monto, concepto);
-                        if (estado) {
-                            guardarDatos();
-                            this.ingresos += monto;
-                        }
+                    try {
+                        concepto = sc.next();
+                    } catch (Exception e) {
+                        System.out.println("Ocurrió un error.");
+                    }
 
-                    } while (estado);
+                    estado = sesion.depositarMonto(monto, concepto);
+                    if (estado) {
+                        guardarDatos();
+                        this.ingresos += monto;
+                    }
+
                     break;
                 case 3:
                     monto = 0;
                     concepto = "";
-                    do {
-                        System.out.print("Monto a retirar: ");
 
-                        try {
-                            monto = sc.nextInt();
-                        } catch (Exception e) {
-                            System.out.println("Ocurrió un error.");
-                        }
+                    System.out.print("Monto a retirar: ");
 
-                        System.out.print("Concepto: ");
+                    try {
+                        monto = sc.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Ocurrió un error.");
+                    }
 
-                        try {
-                            concepto = sc.nextLine();
-                        } catch (Exception e) {
-                            System.out.println("Ocurrió un error.");
-                        }
+                    System.out.print("Concepto: ");
+                    sc = new Scanner(System.in);
+                    try {
+                        concepto = sc.nextLine();
+                    } catch (Exception e) {
+                        System.out.println("Ocurrió un error.");
+                    }
 
-                        estado = sesion.retirarMonto(monto, concepto);
-                        if (estado) {
-                            guardarDatos();
-                            this.egresos += monto;
-                        }
+                    estado = sesion.retirarMonto(monto, concepto);
+                    if (estado) {
+                        guardarDatos();
+                        this.egresos += monto;
+                    }
 
-
-                    } while (estado);
                     break;
 
                 case 4:
@@ -270,6 +281,11 @@ public class Banco {
                 default:
                     System.out.println("No se agregó una opción válida.");
                     break;
+            }
+            try {
+                System.in.read();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
         }while (salir) ;

@@ -155,7 +155,7 @@ public class Cuenta {
      */
     public boolean retirarMonto(float monto, String concepto){
         Movimiento retiro = new Movimiento("Retiro", monto, concepto);
-        if (this.saldo > retiro.getMonto() && this.saldo > 0){
+        if (this.saldo > retiro.getMonto() && monto > 0){
 
             this.saldo -= retiro.getMonto();
             this.egresos += retiro.getMonto();
@@ -177,7 +177,7 @@ public class Cuenta {
      * @param concepto
      */
     public boolean depositarMonto(float monto, String concepto){
-        if(monto > 0){
+        if(monto <= 0){
             System.out.println("No es valido la entrada del monto.");
             return false;
         }
