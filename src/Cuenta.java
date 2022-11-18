@@ -76,6 +76,14 @@ public class Cuenta {
     }
 
     /**
+     * Setter que modifica el apellido del cliente.
+     * @param apellidos
+     */
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    /**
      * Setter que modifica el RFC del cliente.
      * @param RFC
      */
